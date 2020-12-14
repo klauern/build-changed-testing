@@ -47,6 +47,7 @@ jobs:
       # run: echo "::set-output name=matrix::{\"include\":$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1]')}"
         # ARY=$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
       run: |
+        BASE_SHA=${{github.event.base.sha}}
         ARY=$(git diff --name-only ${{github.event.base.sha}} -- packer | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
         if [ "$ARY" != "[]" ]; then echo "::set-output name=has_changes::true"; fi
         echo "::set-output name=matrix::{\"include\": $ARY}"
