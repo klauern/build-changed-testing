@@ -62,4 +62,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build ${{ matrix.include }}
-        run: echo "running build on ${{ matrix.include }}"
+        run: echo "running build on ${{ matrix.file }}"
