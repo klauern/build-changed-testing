@@ -23,7 +23,7 @@ jobs:
   build:
     needs: git-diff
     runs-on: ubuntu-20.04
-    if: ${{needs.git-diff.outputs.HAS_CHANGES)}}
+    if: ${{needs.git-diff.outputs.HAS_CHANGES}}
     strategy:
       matrix: ${{fromJson(needs.git-diff.outputs.matrix)}}
     steps:
