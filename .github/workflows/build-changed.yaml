@@ -1,11 +1,6 @@
 name: test building changes
 
 on:
-  push:
-    branches: [master, main]
-    paths:
-    - "*.yml"
-    - "**/*.yaml"
   pull_request:
     branches: [master, main]
     paths:
