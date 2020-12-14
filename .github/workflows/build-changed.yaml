@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - id: set-matrix
-      run: echo "::set-output name=matrix::{\"include\":$(git diff --name-only . | jq -R -s -c 'split(\"\\n\")[:-1]')}"
+      run: echo "::set-output name=matrix::{\"include\":$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1]')}"
   build:
     needs: git-diff
     runs-on: ubuntu-20.04
