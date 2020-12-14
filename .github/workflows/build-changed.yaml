@@ -1,0 +1,25 @@
+name: Build AMIs
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+    - "*.yml"
+    - "*.yaml"
+
+jobs:
+  git-diff:
+    runs-on: ubuntu-20.04
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix
+      run: echo "::set-output name=matrix::{\"include\":$(git diff --name-only packer | jq -R -s -c '.')}"
+  build:
+    needs: git-diff
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix: ${{fromJson(needs.git-diff.outputs.matrix)}}
+    steps:
+      - name: build ${{ matrix }}
+        run: echo "running build on ${{ matrix }}"
