@@ -48,7 +48,8 @@ jobs:
         # ARY=$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
       run: |
         BASE_SHA=${{github.event.pull_request.base.sha}}
-        ARY=$(git diff --name-only ${{github.event.pull_request.base.sha}} -- packer | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
+        ARY=$(git diff --name-only ${{github.event.pull_request.base.sha}} ${{github.event.pull_request.head.sha}} -- packer | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
+        echo $ARY
         if [ "$ARY" != "[]" ]; then echo "::set-output name=has_changes::true"; fi
         echo "::set-output name=matrix::{\"include\": $ARY}"
   build:
