@@ -26,6 +26,6 @@ jobs:
       matrix: ${{fromJson(needs.git-diff.outputs.matrix)}}
     steps:
       - uses: actions/checkout@v2
-      - name: build ${{ matrix }}
+      - name: build ${{ matrix.include }}
         if: ${{ matrix }}
         run: echo "running build on ${{ matrix }}"
