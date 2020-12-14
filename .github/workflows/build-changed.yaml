@@ -1,11 +1,11 @@
-name: Build AMIs
+name: test building changes
 
 on:
   push:
     branches: [master, main]
     paths:
     - "*.yml"
-    - "*.yaml"
+    - "**/*.yaml"
 
 jobs:
   git-diff:
