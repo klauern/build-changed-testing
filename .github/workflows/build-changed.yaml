@@ -18,7 +18,7 @@ jobs:
       # run: echo "::set-output name=matrix::{\"include\":$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1]')}"
       run: |
         ARY=$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
-        if [ $ARY!="[]"]; then echo "::set-output name=HAS_CHANGES::true"
+        if [ $ARY!="[]"]; then echo "::set-output name=HAS_CHANGES::true" fi
         echo "::set-output name=matrix::{\"include\": $ARY}"
   build:
     needs: git-diff
