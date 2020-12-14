@@ -17,7 +17,7 @@ jobs:
     - id: set-matrix
       # run: echo "::set-output name=matrix::{\"include\":$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1]')}"
       run: |
-        ARY=$(ls .* | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
+        ARY=$(git diff --name-only . | jq -R -s -c 'split("\n")[:-1] | map({file: .})')
         echo "::set-output name=matrix::{\"include\": $ARY}"
   build:
     needs: git-diff
